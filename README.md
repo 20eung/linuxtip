@@ -150,4 +150,43 @@ HOST: gcpmc                       Loss%   Snt   Last   Avg  Best  Wrst StDev
         72.14.237.51
         172.253.67.219
   4.|-- ???                       100.0    10    0.0   0.0   0.0   0.0   0.0
-  ```
+```
+
+## Connect Kubernetes node ports
+
+> 1. Get the IP address of a Kubernetes node:
+```
+kubectl get nodes -o wide
+```
+
+> 2. Get the NodePort of your service:
+```
+kubectl get svc <service-name>
+```
+
+> 3. Connect to the service from your local host:
+```
+curl -I http://<node-ip>:<node-port>
+```
+
+>> Example
+```yaml
+$ kubectl get nodes -o wide
+NAME       STATUS   ROLES           AGE     VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION    CONTAINER-RUNTIME
+minikube   Ready    control-plane   5d13h   v1.26.1   192.168.49.2   <none>        Ubuntu 20.04.5 LTS   5.15.0-1027-gcp   docker://20.10.23
+
+$ kubectl get svc wordpress
+NAME        TYPE       CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
+wordpress   NodePort   10.106.135.223   <none>        80:30000/TCP   58m
+
+$ curl -I http://192.168.49.2:30000
+HTTP/1.1 302 Found
+Date: Sun, 12 Feb 2023 04:24:20 GMT
+Server: Apache/2.4.52 (Debian)
+X-Powered-By: PHP/8.1.3
+Expires: Wed, 11 Jan 1984 05:00:00 GMT
+Cache-Control: no-cache, must-revalidate, max-age=0
+X-Redirect-By: WordPress
+Location: http://192.168.49.2:30000/wp-admin/install.php
+Content-Type: text/html; charset=UTF-8
+```
