@@ -110,7 +110,7 @@ Usage:
 See the 'man 8 mtr' for details.
 ```
 
-> Example: IPv4, TCP 30000, no-dns, interface ens4, report mode
+> Example: IPv4, TCP 443, no-dns, interface ens4, report mode
 ```
 mtr -4Tnr -I ens4 -P 443 google.com
 ```
