@@ -147,15 +147,15 @@ mtr -4Tnr -I ens4 -P 443 google.com
 ```
 
 >> Output
-```
-Start: 2023-02-12T13:04:53+0900
-HOST: gcpmc                       Loss%   Snt   Last   Avg  Best  Wrst StDev
-  1.|-- ???                       100.0    10    0.0   0.0   0.0   0.0   0.0
-  2.|-- 192.145.251.68             0.0%    10    8.3   8.2   2.4  41.9  12.3
-  3.|-- 141.101.82.7               0.0%    10    2.3   3.8   1.9  16.3   4.4
-        172.71.108.3
-  4.|-- 104.18.3.161               0.0%    10    1.6   2.0   1.6   2.3   0.3
-```
+> ```
+> Start: 2023-02-12T13:04:53+0900
+> HOST: gcpmc                       Loss%   Snt   Last   Avg  Best  Wrst StDev
+>   1.|-- ???                       100.0    10    0.0   0.0   0.0   0.0   0.0
+>   2.|-- 192.145.251.68             0.0%    10    8.3   8.2   2.4  41.9  12.3
+>   3.|-- 141.101.82.7               0.0%    10    2.3   3.8   1.9  16.3   4.4
+>         172.71.108.3
+>   4.|-- 104.18.3.161               0.0%    10    1.6   2.0   1.6   2.3   0.3
+> ```
 
 > Example: UDP 53(DNS), report
 ```
@@ -163,25 +163,25 @@ mtr -urP 53 8.8.8.8
 ```
 
 >> Output
-```
-Start: 2023-02-12T13:02:02+0900
-HOST: gcpmc                       Loss%   Snt   Last   Avg  Best  Wrst StDev
-  1.|-- ???                       100.0    10    0.0   0.0   0.0   0.0   0.0
-  2.|-- 142.250.213.59             0.0%    10    2.9   2.2   1.1   3.8   0.9
-        142.251.226.135
-        142.251.225.81
-        142.251.226.183
-        142.251.225.79
-        142.251.226.133
-        108.170.236.213
-  3.|-- 216.239.46.9               0.0%    10    1.7   2.1   1.5   2.6   0.4
-        172.253.67.163
-        216.239.46.15
-        172.253.67.165
-        72.14.237.51
-        172.253.67.219
-  4.|-- ???                       100.0    10    0.0   0.0   0.0   0.0   0.0
-```
+> ```
+> Start: 2023-02-12T13:02:02+0900
+> HOST: gcpmc                       Loss%   Snt   Last   Avg  Best  Wrst StDev
+>   1.|-- ???                       100.0    10    0.0   0.0   0.0   0.0   0.0
+>   2.|-- 142.250.213.59             0.0%    10    2.9   2.2   1.1   3.8   0.9
+>         142.251.226.135
+>         142.251.225.81
+>         142.251.226.183
+>         142.251.225.79
+>         142.251.226.133
+>         108.170.236.213
+>   3.|-- 216.239.46.9               0.0%    10    1.7   2.1   1.5   2.6   0.4
+>         172.253.67.163
+>         216.239.46.15
+>         172.253.67.165
+>         72.14.237.51
+>         172.253.67.219
+>   4.|-- ???                       100.0    10    0.0   0.0   0.0   0.0   0.0
+> ```
 
 ## Connect Kubernetes node ports
 
@@ -201,23 +201,23 @@ curl -I http://<node-ip>:<node-port>
 ```
 
 >> Example
-```yaml
-$ kubectl get nodes -o wide
-NAME       STATUS   ROLES           AGE     VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION    CONTAINER-RUNTIME
-minikube   Ready    control-plane   5d13h   v1.26.1   192.168.49.2   <none>        Ubuntu 20.04.5 LTS   5.15.0-1027-gcp   docker://20.10.23
-
-$ kubectl get svc wordpress
-NAME        TYPE       CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
-wordpress   NodePort   10.106.135.223   <none>        80:30000/TCP   58m
-
-$ curl -I http://192.168.49.2:30000
-HTTP/1.1 302 Found
-Date: Sun, 12 Feb 2023 04:24:20 GMT
-Server: Apache/2.4.52 (Debian)
-X-Powered-By: PHP/8.1.3
-Expires: Wed, 11 Jan 1984 05:00:00 GMT
-Cache-Control: no-cache, must-revalidate, max-age=0
-X-Redirect-By: WordPress
-Location: http://192.168.49.2:30000/wp-admin/install.php
-Content-Type: text/html; charset=UTF-8
-```
+> ```yaml
+> $ kubectl get nodes -o wide
+> NAME       STATUS   ROLES           AGE     VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION    CONTAINER-RUNTIME
+> minikube   Ready    control-plane   5d13h   v1.26.1   192.168.49.2   <none>        Ubuntu 20.04.5 LTS   5.15.0-1027-gcp   docker://20.10.23
+> 
+> $ kubectl get svc wordpress
+> NAME        TYPE       CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
+> wordpress   NodePort   10.106.135.223   <none>        80:30000/TCP   58m
+> 
+> $ curl -I http://192.168.49.2:30000
+> HTTP/1.1 302 Found
+> Date: Sun, 12 Feb 2023 04:24:20 GMT
+> Server: Apache/2.4.52 (Debian)
+> X-Powered-By: PHP/8.1.3
+> Expires: Wed, 11 Jan 1984 05:00:00 GMT
+> Cache-Control: no-cache, must-revalidate, max-age=0
+> X-Redirect-By: WordPress
+> Location: http://192.168.49.2:30000/wp-admin/install.php
+> Content-Type: text/html; charset=UTF-8
+> ```
