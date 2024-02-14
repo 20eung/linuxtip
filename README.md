@@ -1,5 +1,36 @@
 # Linux Tips
 
+# WSL /mnt/c Permission
+```
+sudo vi /etc/wsl.conf
+```
+
+```
+[automount]
+enabled = true
+root = /mnt/
+options = "metadata,umask=22,fmask=11"
+```
+
+> Before
+```
+$ ls -l github
+total 0
+drwxrwxrwx 1 ubuntu ubuntu 4096 Jan 10 16:06 ./
+drwxrwxrwx 1 ubuntu ubuntu 4096 Feb 14 09:50 ../
+drwxrwxrwx 1 ubuntu ubuntu 4096 Jan 10 16:05 charts/
+-rwxrwxrwx 1 ubuntu ubuntu   19 Feb 14 09:36 README.md
+```
+> After
+```
+$ ls -l github
+total 0
+drwxr-xr-x 1 ubuntu ubuntu 4096 Jan 10 16:06 ./
+drwxr-xr-x 1 ubuntu ubuntu 4096 Feb 14 09:50 ../
+drwxr-xr-x 1 ubuntu ubuntu 4096 Jan 10 16:05 charts/
+-rw-r--r-- 1 ubuntu ubuntu   19 Feb 14 09:36 README.md
+```
+
 ## traceroute
 
 > Install
